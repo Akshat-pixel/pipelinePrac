@@ -1,0 +1,44 @@
+services:
+  db:
+    container_name: vprodb
+    build:
+      context: ./ 
+      dockerfile: ./Docker-files/db/Dockerfile
+    environment:
+      - MYSQL_ROOT_PASSWORD=vprodbpass
+    volumes:
+      - "./data:/var/lib/mysql"
+    ports:
+      - 3306:3306
+  memcach:
+    container_name: vprocache01
+    image: 'memcached'
+    ports:
+      - 11211:11211
+    depends_on:
+      - db
+  rabbitmq:
+    container_name: vpromq01
+    image: 'rabbitmq'
+    ports:
+      - 5672:5672
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
+    depends_on:
+      - memcach
+  app:
+    container_name: vproapp
+    build: 
+      dockerfile: ./Docker-files/app/Dockerfile
+    ports:
+      - 8080:8080
+    depends_on:
+      - rabbitmq
+  web:
+    build: 
+      dockerfile: ./Docker-files/web/Dockerfile
+    ports:
+      - 80:80
+    depends_on:
+      - app
