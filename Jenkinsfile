@@ -7,7 +7,7 @@ pipeline {
     environment {
         NEXUS_VERSION = "nexus3"
         NEXUS_PROTOCOL = "http"
-        NEXUS_URL = "172.31.30.191:8081"
+        NEXUS_URL = "204.236.213.225:8081"
         NEXUS_REPOSITORY = "vprofile"
         NEXUS_GROUPID = "QA"
         NEXUS_CREDENTIAL_ID = "nexuscred"
@@ -69,7 +69,7 @@ pipeline {
                 nexusArtifactUploader(
                     nexusVersion: NEXUS_VERSION,
                     protocol: NEXUS_PROTOCOL,
-                    nexusUrl: NEXUS_URL,
+                    nexusUrl: 172.31.30.191:8081,
                     groupId: NEXUS_GROUPID,
                     version: ARTVERSION,
                     repository: NEXUS_REPOSITORY,
