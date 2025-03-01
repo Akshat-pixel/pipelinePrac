@@ -85,9 +85,10 @@ pipeline {
             steps {
                 sshagent(credentials: ['ansible-kp']) {
                     sh """
-                    ssh -t -o StrictHostKeyChecking=no ubuntu@54.234.125.118 << EOF
-                    ansible-playbook /home/ubuntu/docker_install/docker_setup.yaml 
-                    ansible-playbook tomcat_setup.yaml --extra-vars "artifact_url=http://${NEXUS_URL}/repository/${NEXUS_REPOSITORY}/${NEXUS_GROUPID}/${NEXUS_ARTIFACT_ID}/${ARTVERSION}/${NEXUS_ARTIFACT_ID}-${ARTVERSION}.war"
+                    ssh -t -o StrictHostKeyChecking=no ubuntu@54.164.138.122 << EOF
+                    cd /home/ubuntu/pipelinePrac || git clone https://github.com/Akshat-pixel/pipelinePrac.git /home/ubuntu/pipelinePrac
+                    cd /home/ubuntu/pipelinePrac
+                    ansible-playbook /home/ubuntu/pipelinePrac/docker.yaml --extra-vars "artifact_url=http://${NEXUS_URL}/repository/${NEXUS_REPOSITORY}/${NEXUS_GROUPID}/${NEXUS_ARTIFACT_ID}/${ARTVERSION}/${NEXUS_ARTIFACT_ID}-${ARTVERSION}.war"
                     << EOF
                     """
                 }
