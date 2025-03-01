@@ -14,5 +14,5 @@
 
 - name: Start the container
   ansible.builtin.shell:
-    cmd: docker compose -d up
+    cmd: docker compose up -d
     chdir: /home/ubuntu/pipelinePrac/
