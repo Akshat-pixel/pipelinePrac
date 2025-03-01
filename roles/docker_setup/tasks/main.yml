@@ -1,0 +1,18 @@
+---
+# tasks file for docker_setup
+
+- name: pull source code
+  ansible.builtin.git:
+    repo: 'https://github.com/Akshat-pixel/pipelinePrac.git'
+    dest: /home/ubuntu/
+
+- name: Download latest artifact from Nexus
+  get_url:
+    url: "{{ artifact_url }}"
+    dest: /home/ubuntu/pipelinePrac/target/
+    mode: '0644'
+
+- name: Start the container
+  ansible.builtin.shell:
+    cmd: docker-compose -d up
+    chdir: /home/ubuntu/pipelinePrac/

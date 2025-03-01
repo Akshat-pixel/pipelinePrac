@@ -1,0 +1,58 @@
+---
+# tasks file for docker_setup
+
+- name: Update the System Packages
+  apt:
+    update_cache: yes
+  when: ansible_distribution == 'Ubuntu'
+
+- name: Install JAVA
+  apt:
+    name:
+      - ca-certificates
+      - curl
+    state: present
+  when: ansible_distribution == 'Ubuntu'
+
+- name: Insuring path to keys exists
+  file:
+    - path: /etc/apt/keyrings
+      state: directory
+      mode: "0755"
+
+- name: download
+  get_url:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    dest: /etc/apt/keyrings/docker.asc
+    mode: "0644"
+
+- name: Get Ubuntu codename
+  command: bash -c ". /etc/os-release && echo ${UBUNTU_CODENAME:-$VERSION_CODENAME}"
+  register: ubuntu_codename
+  changed_when: false
+
+- name: Get system architecture
+  command: dpkg --print-architecture
+  register: system_arch
+  changed_when: false
+
+- name: Add Docker repository
+  apt_repository:
+    repo: "deb [arch={{ system_arch.stdout }} signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu {{ ubuntu_codename.stdout }} stable"
+    filename: docker
+    state: present
+
+- name: Update apt cache
+  apt:
+    update_cache: yes
+
+- name: Install Docker
+  apt:
+    name:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+      - docker-buildx-plugin
+      - docker-compose-plugin
+    state: present
+
