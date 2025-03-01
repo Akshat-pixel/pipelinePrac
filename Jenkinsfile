@@ -86,7 +86,7 @@ pipeline {
                 sshagent(credentials: ['ansible-kp']) {
                     sh """
                     ssh -t -o StrictHostKeyChecking=no ubuntu@52.202.225.7 << EOF
-                    cd /home/ubuntu/pipelinePrac || git clone https://github.com/Akshat-pixel/pipelinePrac.git /home/ubuntu/pipelinePrac
+                    cd /home/ubuntu/pipelinePrac && git pull origin main|| git clone https://github.com/Akshat-pixel/pipelinePrac.git /home/ubuntu/pipelinePrac
                     cd /home/ubuntu/pipelinePrac
                     ansible-playbook /home/ubuntu/pipelinePrac/docker.yaml --extra-vars "artifact_url=http://${NEXUS_URL}/repository/${NEXUS_REPOSITORY}/${NEXUS_GROUPID}/${NEXUS_ARTIFACT_ID}/${ARTVERSION}/${NEXUS_ARTIFACT_ID}-${ARTVERSION}.war"
                     << EOF
