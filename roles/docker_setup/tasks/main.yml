@@ -4,7 +4,7 @@
 - name: pull source code
   ansible.builtin.git:
     repo: 'https://github.com/Akshat-pixel/pipelinePrac.git'
-    dest: /home/ubuntu/
+    dest: /home/ubuntu/pipelinePrac
 
 - name: Download latest artifact from Nexus
   get_url:
