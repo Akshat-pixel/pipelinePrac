@@ -12,7 +12,7 @@ pipeline {
         NEXUS_GROUPID = "QA"
         NEXUS_CREDENTIAL_ID = "nexuscred"
         NEXUS_ARTIFACT_ID = "vproapp"
-        ARTVERSION = "${env.BUILD_ID}-${env.BUILD_TIMESTAMP}"
+        ARTVERSION = "${env.BUILD_ID}"
         scannerHome = tool 'sonar6.2'
 
     }
