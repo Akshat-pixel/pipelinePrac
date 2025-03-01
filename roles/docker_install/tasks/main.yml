@@ -16,9 +16,9 @@
 
 - name: Insuring path to keys exists
   file:
-    - path: /etc/apt/keyrings
-      state: directory
-      mode: "755"
+    path: /etc/apt/keyrings
+    state: directory
+    mode: "755"
 
 - name: download
   get_url:
