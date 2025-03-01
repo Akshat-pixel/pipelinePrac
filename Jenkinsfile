@@ -69,7 +69,7 @@ pipeline {
                 nexusArtifactUploader(
                     nexusVersion: NEXUS_VERSION,
                     protocol: NEXUS_PROTOCOL,
-                    nexusUrl: 172.31.30.191:8081,
+                    nexusUrl: "172.31.30.191:8081",
                     groupId: NEXUS_GROUPID,
                     version: ARTVERSION,
                     repository: NEXUS_REPOSITORY,
