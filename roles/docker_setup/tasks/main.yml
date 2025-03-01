@@ -10,7 +10,7 @@
   get_url:
     url: "{{ artifact_url }}"
     dest: /home/ubuntu/pipelinePrac/target/
-    mode: '0644'
+    mode: '644'
 
 - name: Start the container
   ansible.builtin.shell:
