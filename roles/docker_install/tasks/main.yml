@@ -18,13 +18,13 @@
   file:
     - path: /etc/apt/keyrings
       state: directory
-      mode: "0755"
+      mode: "755"
 
 - name: download
   get_url:
     url: https://download.docker.com/linux/ubuntu/gpg
     dest: /etc/apt/keyrings/docker.asc
-    mode: "0644"
+    mode: "644"
 
 - name: Get Ubuntu codename
   command: bash -c ". /etc/os-release && echo ${UBUNTU_CODENAME:-$VERSION_CODENAME}"
