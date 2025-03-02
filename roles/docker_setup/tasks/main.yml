@@ -9,8 +9,9 @@
 - name: Download latest artifact from Nexus
   get_url:
     url: "{{ artifact_url }}"
-    dest: /home/ubuntu/pipelinePrac/target/
+    dest: /home/ubuntu/pipelinePrac/target/vproapp.war
     mode: '644'
+    force: yes
 
 - name: Start the container
   ansible.builtin.shell:
